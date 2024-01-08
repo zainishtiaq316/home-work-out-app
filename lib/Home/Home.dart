@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homeworkout/Home/calenderScreen.dart';
 import 'package:homeworkout/Widget/advancedStyle.dart';
 import 'package:homeworkout/Widget/beginnerStyle.dart';
 import 'package:homeworkout/Widget/discoverCard.dart';
@@ -173,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             selectedDate = num!;
           });
+          _navigateToCalendarScreen(context, selectedDate);
         },
         child: Container(
           decoration: BoxDecoration(
@@ -193,6 +195,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _navigateToCalendarScreen(BuildContext context, int selectedDate) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CalendarScreen(selectedDate: selectedDate),
       ),
     );
   }
