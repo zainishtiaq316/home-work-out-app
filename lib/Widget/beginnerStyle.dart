@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homeworkout/Model/beginner.dart';
+import 'package:homeworkout/Model/beginnerModel.dart';
 import 'package:homeworkout/Widget/beginnerCard.dart';
 
 class BeginnerStyle extends StatelessWidget {

@@ -13,8 +13,8 @@ class DiscoverCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                  image: NetworkImage(
-                    "https://www.24hourfitness.com/24life/fitness/2020/media_144e7cdb63c2f377920ff19a0bb9e6e9163f34b57.jpeg?width=750&format=jpeg&optimize=medium",
+                  image: AssetImage(
+                    "assets/images/discover.jpeg",
                   ),
                   fit: BoxFit.cover)),
         ),

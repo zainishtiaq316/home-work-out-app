@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homeworkout/Model/beginner.dart';
+import 'package:homeworkout/Model/beginnerModel.dart';
 
 class IntermediateCard extends StatelessWidget {
   final BeginnerModel model;
@@ -13,7 +13,7 @@ class IntermediateCard extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                  image: NetworkImage(
+                  image: AssetImage(
                     model.image!,
                   ),
                   fit: BoxFit.cover)),

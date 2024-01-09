@@ -1,8 +1,31 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:homeworkout/Model/beginnerModel.dart';
+import 'package:homeworkout/Model/bodyFocusModel.dart';
+import 'package:homeworkout/Model/challengeModel.dart';
+import 'package:homeworkout/Model/fastworkoutmodel.dart';
+import 'package:homeworkout/Model/picksModel.dart';
+import 'package:homeworkout/Model/stretchModel.dart';
+import 'package:homeworkout/Services/FirestoreService.dart';
+import 'package:homeworkout/firebase_options.dart';
 import 'package:homeworkout/page/homepage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
+  FirestoreService().BeginnerModelData(beginnerItems, 'beginner');
+
+  FirestoreService().BeginnerModelData(intermediateItems, 'intermediate');
+
+  FirestoreService().BeginnerModelData(advancedItems, 'advanced');
+  FirestoreService().bodyFocusData(bodyfocusitems);
+  FirestoreService().challengeData(challenngeItems);
+  FirestoreService().fastWorkData(fastWorkItems);
+  FirestoreService().pickData(discoverPicksItems);
+  FirestoreService().stretchData(stretchItems);
 }
 
 class MyApp extends StatelessWidget {
