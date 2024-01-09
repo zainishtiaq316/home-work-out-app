@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homeworkout/Discover/stayActive.dart';
 import 'package:homeworkout/Home/calenderScreen.dart';
 import 'package:homeworkout/Widget/fastworkoutStyle.dart';
 import 'package:homeworkout/Widget/picksStyle.dart';
@@ -16,6 +17,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         title: Row(
           children: [
             Text(
@@ -114,6 +116,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               ),
             ),
             picksStyle(),
+            StayActive(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 20,
