@@ -1,4 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+
+import 'package:homeworkout/Model/UserModel.dart';
+import 'package:homeworkout/SigninSignup/googleSignIn.dart';
+import 'package:homeworkout/utils/loadingIndicator.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -8,8 +15,152 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final _auth = FirebaseAuth.instance;
+  UserModel loggedInUser = UserModel();
+  String? role;
+  String? token;
+
+  Future<void> getFirebaseMessagingToken() async {
+    await FirebaseMessaging.instance.requestPermission();
+    await FirebaseMessaging.instance.getToken().then((t) {
+      if (t != null) {
+        setState(() {
+          token = t;
+          print('Push Token: $t');
+        });
+      }
+    });
+  }
+
+  Future getuser(String uid) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(uid)
+        .get()
+        .then((value) {
+      loggedInUser = UserModel.fromMap(value.data());
+      setState(() {
+        role = loggedInUser.role;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final googleSignIn = Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+      child: ElevatedButton(
+        onPressed: () async {
+          loader(context);
+          await getFirebaseMessagingToken();
+          await signInWithGoogle(context, loggedInUser, token.toString());
+        },
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Colors.blue;
+              }
+              return Colors.blue;
+            }),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)))),
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Continue with Google",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    Widget bottomSheetModel() {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40), topLeft: Radius.circular(40)),
+          color: Colors.white,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey, shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 20,
+                        )),
+                  )
+                ],
+              ),
+            ),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    shape: BoxShape.circle),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(
+                    "https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png",
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text(
+                "Backup & Restore",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Center(
+                child: Text(
+              "Sychronize your data",
+              style: TextStyle(color: Colors.black, fontSize: 15),
+            )),
+            Padding(
+              padding: const EdgeInsets.only(left: 17, right: 17),
+              child: googleSignIn,
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
@@ -28,8 +179,103 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               child: Column(
                 children: [
+                  // InkWell(
+                  //   onTap: () {},
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(
+                  //         left: 17, right: 17, top: 10, bottom: 10),
+                  //     child: Container(
+                  //       width: MediaQuery.of(context).size.width,
+                  //       child: Column(
+                  //         children: [
+                  //           Row(
+                  //             children: [
+                  //               Column(
+                  //                 crossAxisAlignment: CrossAxisAlignment.start,
+                  //                 children: [
+                  //                   InkWell(
+                  //                     onTap: () {},
+                  //                     child: Row(
+                  //                       children: [
+                  //                         Text(
+                  //                           "Backup & Restore",
+                  //                           style: TextStyle(
+                  //                               color: Colors.black,
+                  //                               fontSize: 15,
+                  //                               fontWeight: FontWeight.bold),
+                  //                         ),
+                  //                         SizedBox(
+                  //                           width: 10,
+                  //                         ),
+                  //                         Image.network(
+                  //                           "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png",
+                  //                           width: MediaQuery.of(context)
+                  //                                   .size
+                  //                                   .width *
+                  //                               0.04,
+                  //                           height: MediaQuery.of(context)
+                  //                                   .size
+                  //                                   .width *
+                  //                               0.04,
+                  //                         ),
+                  //                         SizedBox(
+                  //                           width: 5,
+                  //                         ),
+                  //                         Icon(
+                  //                           Icons.keyboard_arrow_down,
+                  //                           color: Colors.grey,
+                  //                           size: 20,
+                  //                         )
+                  //                       ],
+                  //                     ),
+                  //                   ),
+                  //                   SizedBox(
+                  //                     height: 5,
+                  //                   ),
+                  //                   Text(
+                  //                     "Sign in and synchronize your data",
+                  //                     style: TextStyle(
+                  //                       color: Colors.grey,
+                  //                       fontSize: 13,
+                  //                     ),
+                  //                   )
+                  //                 ],
+                  //               ),
+                  //               Spacer(),
+                  //               GestureDetector(
+                  //                 onTap: () {},
+                  //                 child: Icon(
+                  //                   Icons.sync,
+                  //                   color: Colors.blue,
+                  //                   size: 20,
+                  //                 ),
+                  //               )
+                  //             ],
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(40),
+                                  topLeft: Radius.circular(40)),
+                            ),
+                            child: bottomSheetModel(),
+                          );
+                        },
+                      );
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: 17, right: 17, top: 10, bottom: 10),

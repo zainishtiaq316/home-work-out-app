@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:homeworkout/Discover/stayActive.dart';
 import 'package:homeworkout/Home/calenderScreen.dart';
+import 'package:homeworkout/Widget/bodyFocusStyle.dart';
 import 'package:homeworkout/Widget/fastworkoutStyle.dart';
+import 'package:homeworkout/Widget/forBeginnerStyle.dart';
+import 'package:homeworkout/Widget/forChallengeStyle.dart';
 import 'package:homeworkout/Widget/picksStyle.dart';
 import 'package:homeworkout/Widget/stretchStyle.dart';
 
@@ -116,7 +119,28 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               ),
             ),
             picksStyle(),
-            StayActive(),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              child: StayActive(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+              ),
+              child: Text(
+                "For beginners",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            forBeginnerStyle(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 20,
@@ -144,7 +168,35 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            stretchStyle()
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              child: Text(
+                "Challenge",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            forChallengeStyle(),
+            stretchStyle(),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              child: Text(
+                "Body focus",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            BodyFocusStyle(),
           ],
         ),
       ),

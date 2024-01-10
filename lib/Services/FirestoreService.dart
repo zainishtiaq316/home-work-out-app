@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:homeworkout/Model/beginnerModel.dart';
 import 'package:homeworkout/Model/bodyFocusModel.dart';
-import 'package:homeworkout/Model/challengeModel.dart';
+import 'package:homeworkout/Model/beginnerChallenge.dart';
 import 'package:homeworkout/Model/fastworkoutmodel.dart';
 import 'package:homeworkout/Model/picksModel.dart';
 import 'package:homeworkout/Model/stretchModel.dart';
@@ -45,15 +45,14 @@ class FirestoreService {
     }
   }
 
-  Future<void> challengeData(List<ChallengeModel> data) async {
+  Future<void> challengeData(
+      List<ChallengeModel> data, String CollectionName) async {
     try {
       FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
       for (var item in data) {
-        await firebaseFirestore.collection("challengeData").add({
-          'image': item.image,
-          'name': item.name,
-        });
+        await firebaseFirestore.collection(CollectionName).add(
+            {'image': item.image, 'name': item.name, 'shadow': item.shadow});
       }
 
       print('Data uploaded to Firebase successfully.');

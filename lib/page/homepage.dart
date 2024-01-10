@@ -36,11 +36,11 @@ class _HomePageState extends State<HomePage> {
             label: "Training",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.dangerous),
+            icon: Icon(Icons.explore),
             label: "Discover",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.report_off),
+            icon: Icon(Icons.table_chart),
             label: "Report",
           ),
           BottomNavigationBarItem(

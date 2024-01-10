@@ -61,3 +61,65 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:table_calendar/table_calendar.dart';
+
+// class CalendarScreen extends StatefulWidget {
+//   int? selectedDate;
+
+//   CalendarScreen({this.selectedDate});
+
+//   @override
+//   _CalendarScreenState createState() => _CalendarScreenState();
+// }
+
+// class _CalendarScreenState extends State<CalendarScreen> {
+//   CalendarFormat _calendarFormat = CalendarFormat.week; // Set initial format to week
+//   DateTime _focusedDay = DateTime.now();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.grey.shade100,
+//       appBar: AppBar(
+//         backgroundColor: Colors.white,
+//         title: Text(
+//           "History",
+//           style: TextStyle(
+//               color: Colors.black, fontSize: 13, fontWeight: FontWeight.bold),
+//         ),
+//       ),
+//       body: Column(
+//         children: [
+//           Container(
+//             height: MediaQuery.of(context).size.height * 0.45,
+//             color: Colors.white,
+//             child: Padding(
+//               padding: const EdgeInsets.only(top: 0),
+//               child: TableCalendar(
+//                 headerVisible: false, // Hide header for single-row view
+//                 availableCalendarFormats: {
+//                   CalendarFormat.week: 'Week',
+//                 },
+//                 calendarFormat: _calendarFormat,
+//                 startingDayOfWeek: StartingDayOfWeek.monday,
+//                 focusedDay: _focusedDay,
+//                 selectedDayPredicate: (day) => isSameDay(day, _focusedDay),
+//                 firstDay: DateTime.utc(1900, 10, 16),
+//                 lastDay: DateTime.utc(3000, 3, 14),
+//                 onDaySelected: (selectedDay, focusedDay) {
+//                   setState(() {
+//                     _focusedDay = selectedDay;
+//                   });
+//                   Navigator.of(context).pop(widget.selectedDate);
+//                 },
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:homeworkout/Model/beginnerModel.dart';
 import 'package:homeworkout/Model/bodyFocusModel.dart';
-import 'package:homeworkout/Model/challengeModel.dart';
+import 'package:homeworkout/Model/beginnerChallenge.dart';
 import 'package:homeworkout/Model/fastworkoutmodel.dart';
 import 'package:homeworkout/Model/picksModel.dart';
 import 'package:homeworkout/Model/stretchModel.dart';
@@ -22,7 +22,8 @@ void main() async {
 
   FirestoreService().BeginnerModelData(advancedItems, 'advanced');
   FirestoreService().bodyFocusData(bodyfocusitems);
-  FirestoreService().challengeData(challenngeItems);
+  FirestoreService().challengeData(challenngeItems, "challengeData");
+  FirestoreService().challengeData(beginnerItem, "beginnerData");
   FirestoreService().fastWorkData(fastWorkItems);
   FirestoreService().pickData(discoverPicksItems);
   FirestoreService().stretchData(stretchItems);
