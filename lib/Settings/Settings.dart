@@ -4,6 +4,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import 'package:homeworkout/Model/UserModel.dart';
+import 'package:homeworkout/Settings/general.dart/generalSetting.dart';
+import 'package:homeworkout/Settings/language.dart/languageScreen.dart';
+import 'package:homeworkout/Settings/voice.dart/voiceScreen.dart';
+import 'package:homeworkout/Settings/workOut.dart/workout.dart';
 import 'package:homeworkout/SigninSignup/googleSignIn.dart';
 import 'package:homeworkout/utils/loadingIndicator.dart';
 
@@ -180,7 +184,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 children: [
                   // InkWell(
-                  //   onTap: () {},
+                  //   onTap: () {
+                  //   showModalBottomSheet(
+                  //     context: context,
+                  //     builder: (BuildContext context) {
+                  //       return Container(
+                  //         width: MediaQuery.of(context).size.width,
+                  //         height: MediaQuery.of(context).size.height * 0.7,
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.only(
+                  //               topRight: Radius.circular(40),
+                  //               topLeft: Radius.circular(40)),
+                  //         ),
+                  //         child: bottomSheetModel(),
+                  //       );
+                  //     },
+                  //   );
+                  // },
                   //   child: Padding(
                   //     padding: const EdgeInsets.only(
                   //         left: 17, right: 17, top: 10, bottom: 10),
@@ -527,7 +547,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget otherSettings(String? name, String? iconImage, Color? iconBoxColor) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (name == 'Workout Settings')
+          Navigator.push(context,
+              MaterialPageRoute(builder: ((context) => workOutScreen())));
+
+        if (name == 'General Settings')
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => GeneralSettingScreen())));
+
+        if (name == 'Voice Options (TTS)')
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => voiceScreen()));
+
+        if (name == 'Language Options')
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => languageScreen()));
+      },
       child: Column(
         children: [
           Row(

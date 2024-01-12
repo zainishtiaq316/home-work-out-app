@@ -4,6 +4,7 @@ import 'package:homeworkout/Widget/advancedStyle.dart';
 import 'package:homeworkout/Widget/beginnerStyle.dart';
 import 'package:homeworkout/Widget/discoverCard.dart';
 import 'package:homeworkout/Widget/intermediateStyle.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedDate = 1;
+  CalendarFormat _calendarFormat = CalendarFormat.week;
+  DateTime _focusedDay = DateTime.now();
+  late DateTime _firstDay;
+  late DateTime _lastDay;
+  @override
+  void initState() {
+    super.initState();
+    _updateVisibleDays(_focusedDay);
+  }
+
+  void _updateVisibleDays(DateTime currentDate) {
+    // Calculate the start and end of the current week
+    _firstDay = currentDate.subtract(Duration(days: currentDate.weekday - 1));
+    _lastDay = _firstDay.add(Duration(days: 6));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      for (int i = 1; i <= 7; i++) date(i),
-                    ],
-                  ),
+                  tableCalender()
                 ]),
               ),
             ),
@@ -204,6 +216,69 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => CalendarScreen(selectedDate: selectedDate),
+      ),
+    );
+  }
+
+  Widget tableCalender() {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.12,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 0),
+        child: TableCalendar(
+          headerVisible: false,
+          availableCalendarFormats: {
+            CalendarFormat.week: 'Week',
+          },
+          calendarFormat: _calendarFormat,
+          startingDayOfWeek: StartingDayOfWeek.monday,
+          focusedDay: _focusedDay,
+          firstDay: _firstDay,
+          lastDay: _lastDay,
+          daysOfWeekStyle: DaysOfWeekStyle(
+            weekdayStyle: TextStyle(
+              color: Colors.transparent,
+            ),
+            weekendStyle: TextStyle(
+              color: Colors.transparent,
+            ),
+          ),
+          selectedDayPredicate: (day) => isSameDay(day, _focusedDay),
+          calendarBuilders:
+              CalendarBuilders(defaultBuilder: (context, date, events) {
+            return Container(
+              margin: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isSameDay(date, _focusedDay)
+                    ? Colors.blue // Change color for the focused day
+                    : Colors.transparent,
+              ),
+              child: Center(
+                child: Text(
+                  '${date.day}',
+                  style: TextStyle(
+                    color: isSameDay(date, _focusedDay)
+                        ? Colors.white // Change text color for the focused day
+                        : Colors.black,
+                  ),
+                ),
+              ),
+            );
+          }),
+          onDaySelected: (selectedDay, focusedDay) {
+            setState(() {
+              _focusedDay = selectedDay;
+              _updateVisibleDays(_focusedDay);
+            });
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => CalendarScreen(
+                          selectedDate: selectedDate,
+                        ))));
+          },
+        ),
       ),
     );
   }

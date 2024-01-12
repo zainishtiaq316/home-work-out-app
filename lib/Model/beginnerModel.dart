@@ -1,13 +1,21 @@
 import 'dart:convert';
 
+import 'package:homeworkout/Model/detailModel.dart';
+
 class BeginnerModel {
   int? points;
   String? image;
   String? exerciseName;
   String? time;
   String? exercise;
+  List<DetailModel>? items;
   BeginnerModel(
-      {this.exercise, this.points, this.exerciseName, this.time, this.image});
+      {this.exercise,
+      this.points,
+      this.exerciseName,
+      this.time,
+      this.image,
+      this.items});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -44,12 +52,12 @@ List<BeginnerModel> beginnerItems = [
     exercise: "16 EXERCISES",
   ),
   BeginnerModel(
-    image: "assets/images/CHEST BEGINNER.jpeg",
-    points: 1,
-    exerciseName: "CHEST BEGINNER",
-    time: "11 MINS",
-    exercise: "11 EXERCISES",
-  ),
+      image: "assets/images/CHEST BEGINNER.jpeg",
+      points: 1,
+      exerciseName: "CHEST BEGINNER",
+      time: "11 MINS",
+      exercise: "11 EXERCISES",
+      items: detailItems),
   BeginnerModel(
     image: "assets/images/ARM BEGINNER.jpg",
     points: 1,
