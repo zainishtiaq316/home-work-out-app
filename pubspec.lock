@@ -400,6 +400,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  number_picker_dialog:
+    dependency: "direct main"
+    description:
+      name: number_picker_dialog
+      sha256: "7fdf5579189d9878240ed0afe86895fe84e9e6305897e7ae0b7cac8a153c0650"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   package_config:
     dependency: transitive
     description:

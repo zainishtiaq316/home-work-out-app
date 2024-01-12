@@ -12,14 +12,35 @@ class FirestoreService {
     try {
       FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-      for (var item in data) {
-        await firebaseFirestore.collection(collectionName).add({
-          'points': item.points,
-          'image': item.image,
-          'exerciseName': item.exerciseName,
-          'time': item.time,
-          'exercise': item.exercise,
+      for (var beginnerItem in data) {
+        // Convert DetailModel items to a list of maps
+        List<Map<String, dynamic>> detailItemsData = [];
+        if (beginnerItem.items != null) {
+          detailItemsData = beginnerItem.items!
+              .map((detailItem) => detailItem.toMap())
+              .toList();
+        }
+
+        // Save the BeginnerModel along with its DetailModel items
+        var beginnerDocRef =
+            await firebaseFirestore.collection(collectionName).add({
+          'points': beginnerItem.points,
+          'image': beginnerItem.image,
+          'exerciseName': beginnerItem.exerciseName,
+          'time': beginnerItem.time,
+          'exercise': beginnerItem.exercise,
+          'items': detailItemsData,
         });
+
+        // Optionally, if 'items' is a subcollection, you can use the reference
+        // to add each DetailModel item to the subcollection
+        if (detailItemsData.isNotEmpty) {
+          var itemsSubcollectionRef =
+              beginnerDocRef.collection('items'); // adjust 'items' accordingly
+          for (var detailItemData in detailItemsData) {
+            await itemsSubcollectionRef.add(detailItemData);
+          }
+        }
       }
 
       print('Data uploaded to Firebase successfully.');

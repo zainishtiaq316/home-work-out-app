@@ -22,6 +22,8 @@ class DetailCard extends StatelessWidget {
               ),
               Image.network(
                 model.imageGif!,
+                width: 100,
+                height: 100,
               ),
               SizedBox(
                 width: 10,
@@ -29,14 +31,19 @@ class DetailCard extends StatelessWidget {
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      model.name!,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Text(
+                        model.name!,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Text(
                       model.time!,
