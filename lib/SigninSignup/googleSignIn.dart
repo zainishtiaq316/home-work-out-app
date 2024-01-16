@@ -11,10 +11,19 @@ Future<UserCredential?> signInWithGoogle(
   try {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    if (googleUser == null) {
+      // Handle the case where Google sign-in is not successful
+      return null;
+    }
 
+    // Obtain the auth details from t
+    //he request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser.authentication;
+    if (googleAuth == null) {
+      // Handle the case where Google authentication is not successful
+      return null;
+    }
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,

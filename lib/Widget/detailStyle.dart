@@ -13,7 +13,7 @@ class DetailStyle extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.17,
+                height: MediaQuery.of(context).size.height * 0.1,
                 child: DetailCard(model: absBeginner[index]));
           },
           separatorBuilder: (context, index) {

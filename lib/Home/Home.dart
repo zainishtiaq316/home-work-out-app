@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homeworkout/Discover/Discover.dart';
 import 'package:homeworkout/Home/calenderScreen.dart';
 import 'package:homeworkout/Widget/advancedStyle.dart';
 import 'package:homeworkout/Widget/beginnerStyle.dart';
@@ -155,9 +156,20 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
                 padding: EdgeInsets.only(left: 17, right: 17),
                 child: advancedStyle()),
-            Container(
-                padding: EdgeInsets.only(left: 17, right: 17),
-                child: DiscoverCard())
+            GestureDetector(
+              onTap: () {
+                // Navigate to the Discover tab in the bottom navigation bar
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => DiscoverScreen(),
+                  ),
+                  (route) => false,
+                );
+              },
+              child: Container(
+                  padding: EdgeInsets.only(left: 17, right: 17),
+                  child: DiscoverCard()),
+            )
           ],
         ),
       ),

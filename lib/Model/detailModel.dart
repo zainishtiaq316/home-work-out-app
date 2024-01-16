@@ -43,13 +43,38 @@ List<DetailModel> absBeginner = [
       time: "00:20"),
   DetailModel(
       imageGif:
-          "https://i.pinimg.com/originals/39/31/b8/3931b8eded1e338e2a4cb34722195bcb.gif",
+          "https://i.pinimg.com/originals/51/e5/d9/51e5d9b2ddead29164c5f8e7132dd557.gif",
       name: "ABOMINAL CRUNCHES",
       time: "x16"),
   DetailModel(
       imageGif:
-          "https://i.pinimg.com/originals/39/31/b8/3931b8eded1e338e2a4cb34722195bcb.gif",
-      name: "Jumping Jacks",
+          "https://program.rapidloss.com.au/wp-content/uploads/russian-twist.gif",
+      name: "RUSSIAN TWIST",
+      time: "x20"),
+  DetailModel(
+      imageGif:
+          "https://program.rapidloss.com.au/wp-content/uploads/mountain-climber.gif",
+      name: "MOUNTAIN CLIMBER",
+      time: "x16"),
+  DetailModel(
+      imageGif:
+          "https://the-optimal-you.com/wp-content/uploads/2018/03/Heel-Touch-GIF.gif",
+      name: "HEEL TOUCH",
+      time: "x20"),
+  DetailModel(
+      imageGif:
+          "https://hips.hearstapps.com/hmg-prod/images/workouts/2016/08/legraisekickout-1472059471.gif",
+      name: "LEG RAISES",
+      time: "x16"),
+  DetailModel(
+      imageGif:
+          "https://assets-v2.lottiefiles.com/a/dc68e41e-1189-11ee-a704-a3ee683b17ee/PPWRa1Zbc3.gif",
+      name: "PLANK",
+      time: "00:20"),
+  DetailModel(
+      imageGif:
+          "https://assets-v2.lottiefiles.com/a/dc68e41e-1189-11ee-a704-a3ee683b17ee/PPWRa1Zbc3.gif",
+      name: "PLANK",
       time: "00:20"),
 ];
 List<DetailModel> chestBeginner = [

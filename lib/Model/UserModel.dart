@@ -7,6 +7,7 @@ class UserModel {
   String? photoURL;
   String? token;
   String? role;
+
   // NotificationModel? notifications;
 
   UserModel({
