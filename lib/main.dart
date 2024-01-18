@@ -10,6 +10,8 @@ import 'package:homeworkout/Services/FirestoreService.dart';
 import 'package:homeworkout/firebase_options.dart';
 import 'package:homeworkout/page/homepage.dart';
 
+import 'other/splash.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: Splash(),
     );
   }
 }
